@@ -1,5 +1,5 @@
 require "url_identifier/version"
 
-module UrlIdentifier
+module UrlAnalyzer
   # Your code goes here...
 end

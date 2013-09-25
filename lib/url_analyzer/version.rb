@@ -1,3 +1,3 @@
-module UrlIdentifier
+module UrlAnalyzer
   VERSION = "0.0.1"
 end

@@ -1,14 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'url_identifier/version'
+require 'url_analyzer/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "url_identifier"
-  spec.version       = UrlIdentifier::VERSION
+  spec.name          = "url_analyzer"
+  spec.version       = UrlAnalyzer::VERSION
   spec.authors       = ["Xiyang Chen"]
   spec.email         = ["settinghead@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
+  spec.description   = %q{Retrieve unique identifier information from common websites, such as YouTube, Blogspot, etc.}
   spec.summary       = %q{TODO: Write a gem summary}
   spec.homepage      = ""
   spec.license       = "MIT"
