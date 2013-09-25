@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-require 'url_analyzer'
+require 'url-analyzer'
 
 class DummyClass
 end

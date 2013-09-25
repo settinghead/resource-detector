@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'url_analyzer/version'
+require 'url-analyzer/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "url_analyzer"
+  spec.name          = "url-analyzer"
   spec.version       = UrlAnalyzer::VERSION
   spec.authors       = ["Xiyang Chen"]
   spec.email         = ["settinghead@gmail.com"]
   spec.description   = %q{Retrieve unique identifier information from common websites, such as YouTube, Blogspot, etc.}
   spec.summary       = %q{Given an url, this gem picks out its source of origin and the minimal unique identifier based on its origin. }
-  spec.homepage      = "http://www.github.com/settinghead/url_analyzer"
+  spec.homepage      = "http://www.github.com/settinghead/url-analyzer"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

@@ -1,4 +1,4 @@
-require "url_analyzer/version"
+require "url-analyzer/version"
 require 'domainatrix'
 require 'cgi'
 
