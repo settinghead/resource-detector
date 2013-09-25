@@ -36,6 +36,12 @@ module UrlAnalyzer
       unless dduri.query.nil?
         result[:uid] = parameters["v"].first || result[:uid]
       end
+    elsif duri.domain == "youtu" and duri.public_suffix == "be"
+      result[:source] = "youtube"
+      m = /\/(.+)$/.match duri.path
+      if m.length > 1 #found v id
+        result[:uid] = m[1] || result[:uid]
+      end
     elsif duri.domain == "lookbook"
       result[:source] = "#{domain}"
       if duri.path.start_with? "/look/"
