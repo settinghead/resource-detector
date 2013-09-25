@@ -1,16 +1,16 @@
 require "url_analyzer/version"
+require 'domainatrix'
+require 'cgi'
 
 module UrlAnalyzer
-  def self.analyze(url)
+  def analyze(url)
   	#get url components
-  	url = url_post.url unless url.present?
-    duri = Domainatrix.parse url
+    duri = ::Domainatrix.parse url
     dduri = URI::parse url
-    referral_path = duri.path.empty? ? "/" : duri.path #+ (dduri.fragment.present? ? "\##{dduri.fragment}" : "")
+    referral_path = duri.path.empty? ? "/" : duri.path
     filters = {}
     parameters = {}
-    parameters = CGI::parse dduri.query if dduri.query.present?
-    uid = nil
+    parameters = CGI::parse dduri.query unless dduri.query.nil?
     
     #strip "www"
     if (duri.subdomain.start_with? "www.")
@@ -33,8 +33,8 @@ module UrlAnalyzer
       result[:uid] = "#{referral_path}"
     elsif duri.domain == "youtube"
       result[:source] = "#{domain}"
-      if dduri.query.present?
-        result[:uid] = parameters["v"].first || vid #TODO: temp fix
+      unless dduri.query.nil?
+        result[:uid] = parameters["v"].first || result[:uid]
       end
     elsif duri.domain == "lookbook"
       result[:source] = "#{domain}"
@@ -46,7 +46,7 @@ module UrlAnalyzer
       end
     elsif duri.domain == "fashiolista"
       result[:source] = "#{domain}"
-      if duri.path.start_with? "/look/"
+      if duri.path.start_with? "/item/"
         m = /\/item\/([0-9]+).*/.match duri.path
         if m.length > 1 #found item id
           result[:uid] = m[1] || result[:uid]
@@ -54,12 +54,13 @@ module UrlAnalyzer
       end
     elsif duri.domain == "shareasale"
       result[:source] = "#{domain}"
-      if dduri.query.present?
+      unless dduri.query.nil?
         parameters = CGI::parse dduri.query
-        result[:uid] = parameters["afftrack"].first if parameters["afftrack"].first.present? and not parameters["afftrack"].first.empty?
-        result[:uid] = (aff_id.split '--').first
+        result[:uid] = parameters["afftrack"].first unless parameters["afftrack"].first.nil? or parameters["afftrack"].first.empty?
+        result[:uid] = (result[:uid].split '--').first
       end
     elsif duri.domain == "facebook" #do not process facebook stats for now
+      result[:source] = "#{domain}"
       result[:uid] = nil
     end
     result
