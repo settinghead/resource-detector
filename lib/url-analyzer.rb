@@ -19,7 +19,7 @@ module UrlAnalyzer
     elsif (duri.subdomain== "www" or duri.subdomain.length == 0)
       domain = ""
     else
-      domain = "#{duri.subdomain}"
+      domain = "#{duri.subdomain}."
     end
     domain += duri.domain
 
