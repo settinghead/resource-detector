@@ -1,3 +1,3 @@
 module UrlAnalyzer
-  VERSION = "0.0.1a0002"
+  VERSION = "0.0.2"
 end
