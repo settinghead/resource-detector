@@ -1,12 +1,13 @@
 require "url-analyzer/version"
 require 'domainatrix'
 require 'cgi'
+require "addressable/uri"
 
 module UrlAnalyzer
   def analyze(url)
   	#get url components
     duri = ::Domainatrix.parse url
-    dduri = URI::parse url
+    dduri = Addressable::URI.parse url
     referral_path = duri.path.empty? ? "/" : duri.path
     filters = {}
     parameters = {}
@@ -30,7 +31,7 @@ module UrlAnalyzer
 
     if duri.domain == "blogspot"
       result[:source] = "#{domain}"
-      result[:uid] = "#{referral_path}"
+      result[:uid] = "#{dduri.path}"
     elsif duri.domain == "youtube"
       result[:source] = "#{domain}"
       unless dduri.query.nil?
@@ -64,7 +65,7 @@ module UrlAnalyzer
         parameters = CGI::parse dduri.query
         result[:uid] = parameters["afftrack"].first unless parameters["afftrack"].first.nil? or parameters["afftrack"].first.empty?
         result[:uid] = (result[:uid].split '--').first
-      end
+      end 
     elsif duri.domain == "facebook" #do not process facebook stats for now
       result[:source] = "#{domain}"
       result[:uid] = nil

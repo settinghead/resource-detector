@@ -19,5 +19,6 @@ describe UrlAnalyzer do
 		@dummy_class.analyze("http://www.shareasale.com/r.cfm?b=393018&u=314743&m=41271&afftrack=skim34712X927925Xea9dfabecfd3bfab249967985e2441f9&urllink=www.abc.com%2Fproduct%2Fadd-asa-dadsa").should == {:source => 'shareasale', :uid =>'skim34712X927925Xea9dfabecfd3bfab249967985e2441f9'}
 		@dummy_class.analyze("http://www.fashiolista.com/item/12944315/").should == {:source => 'fashiolista', :uid =>'12944315'}
 		@dummy_class.analyze("http://www.facebook.com/").should == {:source => 'facebook', :uid =>nil}
+		@dummy_class.analyze("http://hello.blogspot.com/2013/09/tronchetti-mon-amour/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=tronchetti-mon-amour").should == {:source => 'hello.blogspot', :uid => '/2013/09/tronchetti-mon-amour/'}
     end
 end
