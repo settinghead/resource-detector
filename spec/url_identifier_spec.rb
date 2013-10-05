@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 
-require 'url-analyzer'
+require 'url-identifier'
 
 class DummyClass
 end
 
-describe UrlAnalyzer do
+describe UrlIdentifier do
 	before(:each) do
 	  @dummy_class = DummyClass.new
-	  @dummy_class.extend(UrlAnalyzer)
+	  @dummy_class.extend(UrlIdentifier)
 	end
 
 	it "should get valid source and uid given a url" do

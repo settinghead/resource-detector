@@ -1,9 +1,9 @@
-require "url-analyzer/version"
+require "url-identifier/version"
 require 'domainatrix'
 require 'cgi'
 require "addressable/uri"
 
-module UrlAnalyzer
+module UrlIdentifier
   def analyze(url)
   	#get url components
     duri = ::Domainatrix.parse url
