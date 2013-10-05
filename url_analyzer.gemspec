@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["settinghead@gmail.com"]
   spec.description   = %q{Retrieve unique identifier information from common websites, such as YouTube, Blogspot, etc.}
   spec.summary       = %q{Given an url, this gem picks out its source of origin and the minimal unique identifier based on its origin. }
-  spec.homepage      = "http://www.github.com/settinghead/url-analyzer"
+  spec.homepage      = "https://www.github.com/settinghead/url-analyzer"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

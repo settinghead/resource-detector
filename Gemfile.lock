@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    url-analyzer (0.0.1a0002)
+    url-analyzer (0.0.2)
 
 GEM
   remote: https://rubygems.org/
