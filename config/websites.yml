@@ -1,0 +1,4 @@
+- domain: blogspot
+  source: "#{domain}"
+- domain: youtube
+  strategy: param
