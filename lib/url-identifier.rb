@@ -12,21 +12,20 @@ module UrlIdentifier
     filters = {}
     parameters = {}
     parameters = CGI::parse dduri.query unless dduri.query.nil?
-    
-    #strip "www"
-    if (duri.subdomain.start_with? "www.")
-      domain = duri.subdomain.slice(4, duri.subdomain.length-4)
-      domain = domain + "." if domain.length > 0
-    elsif (duri.subdomain== "www" or duri.subdomain.length == 0)
-      domain = ""
-    else
-      domain = "#{duri.subdomain}."
-    end
-    domain += duri.domain
 
+    domain = strip_www duri
+
+    #set the default
     result = {
-      :source => domain + ".#{duri.public_suffix}",
+      :source => "#{domain}.#{duri.public_suffix}",
       :uid => referral_path
+    }
+
+    params = {
+      :domain => domain,
+      :path => dduri.path,
+      :query => dduri.query,
+      :public_suffix => duri.public_suffix
     }
 
     if duri.domain == "blogspot"
@@ -62,7 +61,6 @@ module UrlIdentifier
     elsif duri.domain == "shareasale"
       result[:source] = "#{domain}"
       unless dduri.query.nil?
-        parameters = CGI::parse dduri.query
         result[:uid] = parameters["afftrack"].first unless parameters["afftrack"].first.nil? or parameters["afftrack"].first.empty?
         result[:uid] = (result[:uid].split '--').first
       end 
@@ -71,5 +69,20 @@ module UrlIdentifier
       result[:uid] = nil
     end
     result
+  end
+
+  private
+  def strip_www(duri)
+        #strip "www"
+    if (duri.subdomain.start_with? "www.")
+      domain = duri.subdomain.slice(4, duri.subdomain.length-4)
+      domain = domain + "." if domain.length > 0
+    elsif (duri.subdomain== "www" or duri.subdomain.length == 0)
+      domain = ""
+    else
+      domain = "#{duri.subdomain}."
+    end
+    domain += duri.domain
+    domain
   end
 end
